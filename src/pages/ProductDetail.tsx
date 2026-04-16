@@ -2,6 +2,14 @@ import { useParams, Link } from "react-router-dom";
 import { Star, ShoppingCart, ArrowLeft, Check, X } from "lucide-react";
 import { products } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
 const ProductDetail = () => {
   const { id } = useParams();
   const product = products.find((p) => p.id === Number(id));
@@ -10,7 +18,7 @@ const ProductDetail = () => {
     return (
       <div className="container py-20 text-center">
         <h1 className="text-3xl text-foreground mb-4">Product Not Found</h1>
-        <Link to="/products" className="text-primary hover:underline">Back to Products</Link>
+        <Link to="/products" className="text-primary underline">Back to Products</Link>
       </div>
     );
   }
@@ -20,28 +28,31 @@ const ProductDetail = () => {
   return (
     <div>
       <div className="container pt-8 pb-2">
-        <Link to="/products" className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors w-fit">
+        <Link to="/products" className="flex items-center gap-2 text-sm font-semibold text-primary transition-colors w-fit">
           <ArrowLeft className="h-4 w-4" /> Back to Products
         </Link>
       </div>
 
       <section className="container py-10 scroll-fade">
         <div className="grid md:grid-cols-2 gap-10">
-          <div className="group relative bg-accent border border-border rounded-sm p-8 flex items-center justify-center overflow-hidden h-[400px] md:h-[500px]">
-            <img 
-              src={product.image} 
-              alt={product.name} 
-              width={512} 
-              height={512} 
-              className={`max-w-full max-h-full object-contain z-10 transition-all duration-500 ${product.hoverImage ? "group-hover:opacity-0" : "group-hover:scale-110"}`} 
-            />
-            {product.hoverImage && (
-              <img
-                src={product.hoverImage}
-                alt={`${product.name} vehicle`}
-                className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700 scale-105 group-hover:scale-100"
-              />
-            )}
+          <div className="bg-accent border border-border rounded-sm p-4 flex items-center justify-center overflow-hidden h-[400px] md:h-[500px]">
+             <Carousel className="w-full">
+              <CarouselContent>
+                {product.images?.map((img, index) => (
+                  <CarouselItem key={index} className="flex items-center justify-center">
+                    <img 
+                      src={img} 
+                      alt={`${product.name}-${index}`} 
+                      width={512} 
+                      height={512} 
+                      className="max-w-full max-h-[350px] md:max-h-[450px] object-contain" 
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-2" />
+              <CarouselNext className="right-2" />
+            </Carousel>
           </div>
 
           <div>
@@ -81,7 +92,7 @@ const ProductDetail = () => {
             </ul>
 
             <div className="flex gap-4">
-              <button className="flex-1 flex items-center justify-center gap-2 bg-primary text-primary-foreground py-3 font-semibold uppercase text-sm hover:bg-primary/90 transition-colors rounded-sm disabled:opacity-50 font-heading" disabled={!product.inStock}>
+              <button className="flex-1 flex items-center justify-center gap-2 bg-primary text-primary-foreground py-3 font-semibold uppercase text-sm transition-colors rounded-sm disabled:opacity-50 font-heading" disabled={!product.inStock}>
                 <ShoppingCart className="h-5 w-5" /> Enquire Now
               </button>
             </div>

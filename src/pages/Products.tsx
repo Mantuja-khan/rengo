@@ -35,7 +35,7 @@ const Products = () => {
                 <button
                   onClick={() => setSearchParams({})}
                   className={`w-full text-left px-3 py-2 text-sm rounded-sm transition-colors font-heading ${
-                    activeCategory === "All" ? "bg-primary text-primary-foreground" : "hover:bg-accent text-foreground"
+                    activeCategory === "All" ? "bg-primary text-primary-foreground" : "text-foreground"
                   }`}
                 >
                   All Products
@@ -46,7 +46,7 @@ const Products = () => {
                   <button
                     onClick={() => setSearchParams({ category: cat })}
                     className={`w-full text-left px-3 py-2 text-sm rounded-sm transition-colors font-heading ${
-                      activeCategory === cat ? "bg-primary text-primary-foreground" : "hover:bg-accent text-foreground"
+                      activeCategory === cat ? "bg-primary text-primary-foreground" : "text-foreground"
                     }`}
                   >
                     {cat}

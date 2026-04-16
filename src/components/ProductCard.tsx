@@ -5,7 +5,7 @@ import type { Product } from "@/data/products";
 const ProductCard = ({ product }: { product: Product }) => (
   <Link
     to={`/products/${product.id}`}
-    className="group bg-card border border-border rounded-sm overflow-hidden hover:shadow-lg transition-shadow"
+    className="bg-card border border-border rounded-sm overflow-hidden transition-all"
   >
     <div className="relative aspect-square bg-accent overflow-hidden">
       <img
@@ -14,18 +14,8 @@ const ProductCard = ({ product }: { product: Product }) => (
         loading="lazy"
         width={512}
         height={512}
-        className={`w-full h-full object-contain p-4 transition-all duration-500 ${product.hoverImage ? "group-hover:opacity-0" : "group-hover:scale-105"}`}
+        className="w-full h-full object-contain p-4"
       />
-      {product.hoverImage && (
-        <img
-          src={product.hoverImage}
-          alt={`${product.name} vehicle`}
-          loading="lazy"
-          width={512}
-          height={512}
-          className="absolute inset-0 w-full h-full object-cover p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-95 group-hover:scale-100"
-        />
-      )}
       {product.oldPrice && (
         <span className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs font-bold px-2 py-1 rounded-sm z-10">
           {Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)}% OFF
@@ -58,7 +48,7 @@ const ProductCard = ({ product }: { product: Product }) => (
           <span className="text-[10px] md:text-sm text-muted-foreground line-through">₹{product.oldPrice.toLocaleString("en-IN")}</span>
         )}
       </div>
-      <button className="mt-2 md:mt-3 w-full flex items-center justify-center gap-1 md:gap-2 bg-primary text-primary-foreground py-1.5 md:py-2 text-[10px] md:text-sm font-semibold hover:bg-primary/90 transition-colors rounded-sm font-heading">
+      <button className="mt-2 md:mt-3 w-full flex items-center justify-center gap-1 md:gap-2 bg-primary text-primary-foreground py-1.5 md:py-2 text-[10px] md:text-sm font-semibold rounded-sm font-heading">
         <ShoppingCart className="h-3 w-3 md:h-4 md:w-4" />
         View Details
       </button>
