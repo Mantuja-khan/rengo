@@ -30,7 +30,6 @@ export const categories = [
   "Maruti Suzuki Fuel Pumps",
   "Tata Fuel Pumps",
   "Hyundai Fuel Pumps",
-  "Oxygen Sensors",
   "Fuel Pump Assemblies",
   "Fuel Pressure Regulators",
 ];

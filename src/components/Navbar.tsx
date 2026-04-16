@@ -1,8 +1,8 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ShoppingCart, Search, Menu, X } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-import logo from "@/assets/logo.png";
 import { products } from "@/data/products";
+import logo from "../assets/rengologo.png"
 
 const navLinks = [
   { label: "Home", path: "/" },
