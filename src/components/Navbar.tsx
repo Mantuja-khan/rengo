@@ -24,7 +24,9 @@ const Navbar = () => {
     ? products.filter((p) =>
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.vehicle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.model.toLowerCase().includes(searchQuery.toLowerCase())
+      p.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.sku.toLowerCase().includes(searchQuery.toLowerCase())
     )
     : [];
 
@@ -61,12 +63,20 @@ const Navbar = () => {
             </div>
           )}
 
-          <Link to="/" className="flex items-center gap-1 md:gap-2">
-            <img src={logo} alt="Rengo Automotive" className="h-8 md:h-12 w-auto" />
+          <Link to="/" className="flex items-center gap-2 md:gap-4">
+            <img
+              src={logo}
+              alt="Rengo Automotive"
+              className="h-16 md:h-20 w-auto"  // 👈 size increase
+            />
             <div>
-              <span className="font-heading text-lg md:text-2xl font-bold tracking-tight text-foreground">RENGO</span>
-              <span className="font-heading text-lg md:text-2xl font-bold text-primary ml-0.5">AUTOMOTIVES</span>
-              <p className="text-[10px] md:text-xs text-muted-foreground -mt-1"> Private Limited</p>
+              <span className="font-heading text-base md:text-xl font-bold tracking-tight text-foreground">
+                RENGO
+              </span>
+              <span className="font-heading text-base md:text-xl font-bold text-primary ml-0.5">
+                AUTOMOTIVES
+              </span>
+
             </div>
           </Link>
 
@@ -118,8 +128,10 @@ const Navbar = () => {
                   >
                     <img src={p.image} alt={p.name} className="w-12 h-12 object-contain rounded-sm bg-accent" />
                     <div>
-                      <p className="text-sm font-semibold text-foreground">{p.name}</p>
-                      <p className="text-xs text-muted-foreground">{p.vehicle} • ₹{p.price.toLocaleString("en-IN")}</p>
+                      <p className="text-sm font-semibold text-foreground line-clamp-1">{p.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {p.vehicle} • {p.price ? `₹${p.price.toLocaleString("en-IN")}` : "Price on Enquiry"}
+                      </p>
                     </div>
                   </Link>
                 ))

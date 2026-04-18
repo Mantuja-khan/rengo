@@ -20,12 +20,11 @@ const Footer = () => (
         </ul>
       </div>
       <div>
-        <h3 className="text-lg mb-4">Products</h3>
+        <h3 className="text-lg mb-4 uppercase font-heading text-primary font-bold">Categories</h3>
         <ul className="space-y-2 text-sm">
-          <li className="text-muted-foreground">Maruti Suzuki Fuel Pumps</li>
-          <li className="text-muted-foreground">Tata Fuel Pumps</li>
-          <li className="text-muted-foreground">Hyundai Fuel Pumps</li>
-          <li className="text-muted-foreground">Oxygen Sensors</li>
+          <li><Link to="/products?category=Fuel pump" className="text-muted-foreground hover:text-primary transition-colors">Fuel Pump</Link></li>
+          <li><Link to="/products?category=Oxygen Sensors" className="text-muted-foreground hover:text-primary transition-colors">Oxygen Sensors</Link></li>
+          <li><Link to="/products?category=Fuel pump motor" className="text-muted-foreground hover:text-primary transition-colors">Fuel Pump Motor</Link></li>
         </ul>
       </div>
       <div>

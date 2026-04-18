@@ -16,7 +16,7 @@ const ProductCard = ({ product }: { product: Product }) => (
         height={512}
         className="w-full h-full object-contain p-4"
       />
-      {product.oldPrice && (
+      {product.oldPrice && product.price && (
         <span className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs font-bold px-2 py-1 rounded-sm z-10">
           {Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)}% OFF
         </span>
@@ -43,8 +43,10 @@ const ProductCard = ({ product }: { product: Product }) => (
         MODEL :- {product.model}
       </p>
       <div className="flex items-center gap-1 md:gap-2">
-        <span className="text-sm md:text-lg font-bold text-primary font-heading">₹{product.price.toLocaleString("en-IN")}</span>
-        {product.oldPrice && (
+        <span className="text-sm md:text-lg font-bold text-primary font-heading">
+          {product.price ? `₹${product.price.toLocaleString("en-IN")}` : "Price on Enquiry"}
+        </span>
+        {product.oldPrice && product.price && (
           <span className="text-[10px] md:text-sm text-muted-foreground line-through">₹{product.oldPrice.toLocaleString("en-IN")}</span>
         )}
       </div>
