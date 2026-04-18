@@ -54,7 +54,7 @@ useEffect(() => {
             backgroundPosition: 'center',
           }}
         />
-        <div className="absolute inset-0 bg-black/70 z-[1]" />
+        <div className="absolute inset-0 bg-black/85 z-[1]" />
 
         <div className="container relative z-10 grid md:grid-cols-2 gap-8 items-center min-h-[500px]">
           <div className="flex flex-col justify-center order-2 md:order-1 pt-8 md:pt-0">
