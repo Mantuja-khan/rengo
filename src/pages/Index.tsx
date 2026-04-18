@@ -36,8 +36,7 @@ const Index = () => {
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
   }, []);
-
-  useEffect(() => {
+useEffect(() => {
     const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
   }, [nextSlide]);
@@ -45,51 +44,62 @@ const Index = () => {
   return (
     <div className="overflow-x-hidden">
       {/* Hero Section */}
-      <section className="bg-secondary/30 py-12 md:py-0 scroll-fade">
-        <div className="container grid md:grid-cols-2 gap-8 items-center min-h-[500px]">
-          <div className="flex flex-col justify-center order-2 md:order-1">
-            <span className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">Rengo Automotive Pvt Ltd</span>
-            <div className="relative h-[180px] md:h-[220px]">
+      <section className="relative py-12 md:py-0 scroll-fade overflow-hidden min-h-[500px] flex items-center">
+        {/* Background Image with Dark Overlay */}
+        <div 
+          className="absolute inset-0 z-0"
+          style={{ 
+            backgroundImage: `url(${heroSlide4})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        <div className="absolute inset-0 bg-black/70 z-[1]" />
+
+        <div className="container relative z-10 grid md:grid-cols-2 gap-8 items-center min-h-[500px]">
+          <div className="flex flex-col justify-center order-2 md:order-1 pt-8 md:pt-0">
+            <span className="text-primary font-bold text-sm uppercase tracking-[0.3em] mb-4 block drop-shadow-md">Rengo Automotive Pvt Ltd</span>
+            <div className="relative h-[200px] md:h-[240px]">
               {heroSlides.map((slide, i) => (
                 <div
                   key={i}
-                  className={`absolute inset-0 transition-opacity duration-1000 ${i === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`}
+                  className={`absolute inset-0 transition-all duration-1000 transform ${i === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                 >
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl text-foreground mb-4 leading-tight whitespace-pre-line font-heading font-bold">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight whitespace-pre-line font-heading font-black tracking-tight drop-shadow-xl">
                     {slide.title}
                   </h1>
-                  <p className="text-muted-foreground mb-6 max-w-md text-base leading-relaxed font-body">
+                  <p className="text-white/80 mb-8 max-w-md text-base md:text-lg leading-relaxed font-body font-medium drop-shadow-lg">
                     {slide.subtitle}
                   </p>
                 </div>
               ))}
             </div>
-            <div className="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4">
+            <div className="mt-12 flex flex-col sm:flex-row gap-4">
               <Link
                 to="/products"
-                className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 font-semibold uppercase text-sm hover:bg-primary/90 transition-all rounded-sm font-heading"
+                className="inline-flex items-center justify-center gap-3 bg-primary text-primary-foreground px-8 py-4 font-bold uppercase text-sm hover:scale-105 transition-all rounded-sm font-heading shadow-xl"
               >
                 View Products <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 border-2 border-primary text-primary px-8 py-4 font-semibold uppercase text-sm hover:bg-primary hover:text-primary-foreground transition-all rounded-sm font-heading"
+                className="inline-flex items-center justify-center gap-3 border-2 border-white text-white px-8 py-4 font-bold uppercase text-sm hover:bg-white hover:text-primary transition-all rounded-sm font-heading backdrop-blur-sm"
               >
                 Enquire Now
               </Link>
             </div>
-            {/* Dots */}
-            <div className="flex gap-2 mt-8">
+            {/* Dots UI */}
+            <div className="flex gap-3 mt-12">
               {heroSlides.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrentSlide(i)}
-                  className={`w-3 h-3 rounded-full transition-all ${i === currentSlide ? "bg-primary w-8" : "bg-muted-foreground/40"}`}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${i === currentSlide ? "bg-primary w-12" : "bg-white/30 w-4"}`}
                 />
               ))}
             </div>
           </div>
-          <div className="relative order-1 md:order-2 h-[300px] md:h-[500px] flex items-center justify-center">
+          <div className="relative order-1 md:order-2 h-[350px] md:h-[550px] flex items-center justify-center mt-8 md:mt-0">
             {heroSlides.map((slide, i) => (
               <img
                 key={i}
@@ -98,8 +108,8 @@ const Index = () => {
                 className={`absolute inset-0 w-full h-full object-contain transition-all duration-1000 transform ${i === currentSlide ? "opacity-100 scale-100 rotate-0" : "opacity-0 scale-95 rotate-3"}`}
               />
             ))}
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-            <div className="absolute -top-6 -left-6 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute -top-10 -left-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl animate-pulse" />
           </div>
         </div>
       </section>

@@ -59,13 +59,30 @@ const ProductDetail = () => {
           </div>
 
           <div>
-            <h1 className="text-2xl md:text-3xl text-foreground mb-2">{product.name}</h1>
-            <p className="text-sm font-bold text-primary mb-4 uppercase tracking-wider">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl text-foreground mb-4 font-heading font-bold">{product.name}</h1>
+            <p className="text-lg font-extrabold text-primary mb-6 uppercase tracking-[0.1em] border-l-4 border-primary pl-4">
               MODEL :- {product.partNumber || product.model}
             </p>
-            {product.vehicle && (
-              <p className="text-sm text-muted-foreground mb-3">Vehicle: <span className="font-semibold text-foreground">{product.vehicle}</span></p>
-            )}
+            <div className="space-y-3 mb-6">
+              <p className="text-sm text-muted-foreground flex items-center gap-2">
+                <span className="font-bold text-foreground">Origin:</span> OEM
+              </p>
+              {product.name.toUpperCase().includes("MARUTI SUZUKI") && (
+                <p className="text-sm text-muted-foreground flex items-center gap-2">
+                  <span className="font-bold text-foreground">Car Company:</span> Maruti Suzuki
+                </p>
+              )}
+              {product.name.toUpperCase().includes("TATA") && (
+                <p className="text-sm text-muted-foreground flex items-center gap-2">
+                  <span className="font-bold text-foreground">Car Company:</span> Tata Motors
+                </p>
+              )}
+              {product.vehicle && (
+                <p className="text-sm text-muted-foreground flex items-center gap-2">
+                  <span className="font-bold text-foreground">Car Model:</span> {product.vehicle}
+                </p>
+              )}
+            </div>
             <div className="flex items-center gap-1 mb-3">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} className={`h-4 w-4 ${i < product.rating ? "fill-star text-star" : "text-border"}`} />
