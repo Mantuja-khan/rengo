@@ -4,8 +4,8 @@ const oxygenSensorImg = "https://lirp.cdn-website.com/53f3844f/dms3rep/multi/opt
 import motorImg from "@/assets/motor.jpeg";
 import sensor78L00 from "../assets/sensor/78L00.png"
 import sensor78T01 from "../assets/sensor/78T01.png"
-import sensor81r51 from "../assets/sensor/81r51.png"
-import sensor81r61 from "../assets/sensor/81r61.png"
+import sensor81r51 from "../assets/sensor/81R51.png"
+import sensor81r61 from "../assets/sensor/81R61.png"
 import sensor54t00 from "../assets/sensor/54t00.png"
 import pump182453 from "../assets/sensor/182453.png"
 import sensor185400 from "../assets/sensor/20260417_185400.png"
@@ -28,7 +28,6 @@ import sensor69r01 from "../assets/sensor/69R01.png"
 import sensor68r51 from "../assets/sensor/68R51.png"
 import sensor68koo from "../assets/sensor/68K00.png"
 import sensor67p01 from "../assets/sensor/67P01.png"
-import sensor54t01 from "../assets/sensor/54t01.png"
 export interface Product {
   id: number;
   sku: string;
