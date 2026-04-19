@@ -149,11 +149,11 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-3 md:grid-cols-7 gap-8 items-center">
             {brands.map((brand) => (
-              <div key={brand.name} className="flex items-center justify-center p-4">
+              <div key={brand.name} className="flex items-center justify-center p-2 border border-black bg-white rounded-sm h-16 md:h-20">
                 <img 
                   src={brand.logo} 
                   alt={brand.name} 
-                  className="max-h-12 w-auto object-contain transition-transform hover:scale-110" 
+                  className="max-h-full w-auto object-contain transition-transform hover:scale-110" 
                 />
               </div>
             ))}

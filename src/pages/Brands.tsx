@@ -19,7 +19,7 @@ const Brands = () => {
         {brands.map((brand) => (
           <div 
             key={brand.name} 
-            className="bg-white border border-border rounded-sm p-8 flex items-center justify-center min-h-[180px] hover:shadow-lg transition-all"
+            className="bg-white border-2 border-black rounded-sm p-8 flex items-center justify-center min-h-[180px] hover:shadow-lg transition-all"
           >
             <img 
               src={brand.logo} 

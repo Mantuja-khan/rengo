@@ -17,6 +17,13 @@ const ProductDetail = () => {
   const [enquiryOpen, setEnquiryOpen] = useState(false);
   const product = products.find((p) => p.id === Number(id));
 
+  const getObscuredModel = () => {
+    if (!product) return "";
+    const modelStr = product.partNumber || product.model || "";
+    if (modelStr.length <= 6) return modelStr;
+    return `${modelStr.substring(0, 3)}...${modelStr.substring(modelStr.length - 3)}`;
+  };
+
   if (!product) {
     return (
       <div className="container py-20 text-center">
@@ -26,7 +33,7 @@ const ProductDetail = () => {
     );
   }
 
-  const related = products.filter((p) => p.id !== product.id).slice(0, 4);
+  const related = products.filter((p) => p.id !== product.id && p.category === product.category).slice(0, 4);
 
   return (
     <div>
@@ -61,28 +68,9 @@ const ProductDetail = () => {
           <div>
             <h1 className="text-2xl md:text-3xl lg:text-4xl text-foreground mb-4 font-heading font-bold">{product.name}</h1>
             <p className="text-lg font-extrabold text-primary mb-6 uppercase tracking-[0.1em] border-l-4 border-primary pl-4">
-              MODEL :- {product.partNumber || product.model}
+              MODEL :- {product.model}
             </p>
-            <div className="space-y-3 mb-6">
-              <p className="text-sm text-muted-foreground flex items-center gap-2">
-                <span className="font-bold text-foreground">Origin:</span> OEM
-              </p>
-              {product.name.toUpperCase().includes("MARUTI SUZUKI") && (
-                <p className="text-sm text-muted-foreground flex items-center gap-2">
-                  <span className="font-bold text-foreground">Car Company:</span> Maruti Suzuki
-                </p>
-              )}
-              {product.name.toUpperCase().includes("TATA") && (
-                <p className="text-sm text-muted-foreground flex items-center gap-2">
-                  <span className="font-bold text-foreground">Car Company:</span> Tata Motors
-                </p>
-              )}
-              {product.vehicle && (
-                <p className="text-sm text-muted-foreground flex items-center gap-2">
-                  <span className="font-bold text-foreground">Car Model:</span> {product.vehicle}
-                </p>
-              )}
-            </div>
+
             <div className="flex items-center gap-1 mb-3">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} className={`h-4 w-4 ${i < product.rating ? "fill-star text-star" : "text-border"}`} />
@@ -104,7 +92,9 @@ const ProductDetail = () => {
                 <span className="flex items-center gap-1 text-sm font-semibold text-primary"><Check className="h-4 w-4" /> In Stock </span>
               )}
             </div>
-            <p className="text-muted-foreground text-sm leading-relaxed mb-6 font-body normal-case tracking-normal font-normal">{product.description}</p>
+            <p className="text-muted-foreground text-sm leading-relaxed mb-6 font-body normal-case tracking-normal font-normal">
+              {product.description} <strong className="text-primary tracking-wider">{getObscuredModel()}</strong>
+            </p>
 
 
             <div className="flex gap-4">

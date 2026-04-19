@@ -18,8 +18,26 @@ const Products = () => {
       p.model.toLowerCase().includes(query) || 
       p.sku.toLowerCase().includes(query) || 
       p.vehicle.toLowerCase().includes(query) ||
-      p.category.toLowerCase().includes(query);
+      p.category.toLowerCase().includes(query) ||
+      (p.partNumber && p.partNumber.toLowerCase().includes(query));
     return matchesCategory && matchesSearch;
+  }).sort((a, b) => {
+    const query = search.toLowerCase();
+    if (!query) return 0;
+
+    const isHighPriority = (p: typeof products[0]) => 
+      p.model.toLowerCase() === query || 
+      (p.partNumber && p.partNumber.toLowerCase() === query) ||
+      p.sku.toLowerCase() === query ||
+      p.model.toLowerCase().startsWith(query) ||
+      (p.partNumber && p.partNumber.toLowerCase().includes(query) && p.partNumber.toLowerCase().split('...')[1]?.startsWith(query));
+
+    const aPriority = isHighPriority(a);
+    const bPriority = isHighPriority(b);
+
+    if (aPriority && !bPriority) return -1;
+    if (!aPriority && bPriority) return 1;
+    return 0;
   });
 
   return (
@@ -67,7 +85,7 @@ const Products = () => {
             <div className="mb-6 relative">
               <input
                 type="text"
-                placeholder="Search by Name, Model, Vehicle..."
+                placeholder="Search by Name, Model, Part Number, Vehicle..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full pl-4 pr-10 py-3 border border-border bg-card rounded-sm focus:outline-none focus:ring-1 focus:ring-primary shadow-sm"
@@ -79,7 +97,7 @@ const Products = () => {
             
             <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
               {filtered.map((p) => (
-                <ProductCard key={p.id} product={p} />
+                <ProductCard key={p.id} product={p} searchQuery={search} />
               ))}
             </div>
             {filtered.length === 0 && (

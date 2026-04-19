@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ShoppingCart, Search, Menu, X } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { products } from "@/data/products";
+import { Highlight } from "./Highlight";
 import logo from "../assets/rengologo.png"
 
 const navLinks = [
@@ -21,13 +22,33 @@ const Navbar = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const searchResults = searchQuery.trim().length > 0
-    ? products.filter((p) =>
-      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.vehicle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.sku.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+    ? products
+      .filter((p) =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.vehicle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.sku.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (p.partNumber && p.partNumber.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
+      .sort((a, b) => {
+        const query = searchQuery.toLowerCase();
+        
+        // Helper to check if it's a high-priority match
+        const isHighPriority = (p: typeof products[0]) => 
+          p.model.toLowerCase() === query || 
+          (p.partNumber && p.partNumber.toLowerCase() === query) ||
+          p.sku.toLowerCase() === query ||
+          p.model.toLowerCase().startsWith(query) ||
+          (p.partNumber && p.partNumber.toLowerCase().includes(query) && p.partNumber.toLowerCase().split('...')[1]?.startsWith(query));
+
+        const aPriority = isHighPriority(a);
+        const bPriority = isHighPriority(b);
+
+        if (aPriority && !bPriority) return -1;
+        if (!aPriority && bPriority) return 1;
+        return 0;
+      })
     : [];
 
   useEffect(() => {
@@ -52,7 +73,7 @@ const Navbar = () => {
               <input
                 ref={searchInputRef}
                 type="text"
-                placeholder="Search products..."
+                placeholder="Search by model or part number..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="flex-1 bg-transparent text-sm text-foreground outline-none"
@@ -86,7 +107,7 @@ const Navbar = () => {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder="Search by model or part number..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-border bg-background text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary"
@@ -128,8 +149,13 @@ const Navbar = () => {
                   >
                     <img src={p.image} alt={p.name} className="w-12 h-12 object-contain rounded-sm bg-accent" />
                     <div>
-                      <p className="text-sm font-semibold text-foreground line-clamp-1">{p.name}</p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-sm font-semibold text-foreground line-clamp-1">
+                        <Highlight text={p.name} query={searchQuery} />
+                      </p>
+                      <p className="text-[10px] text-primary font-bold uppercase tracking-tight">
+                        Model: <Highlight text={p.model} query={searchQuery} /> {p.partNumber ? <>• <Highlight text={p.partNumber} query={searchQuery} /></> : ""}
+                      </p>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">
                         {p.vehicle} • {p.price ? `₹${p.price.toLocaleString("en-IN")}` : "Price on Enquiry"}
                       </p>
                     </div>

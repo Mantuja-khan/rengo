@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { Star, ShoppingCart } from "lucide-react";
 import type { Product } from "@/data/products";
+import { Highlight } from "./Highlight";
 
-const ProductCard = ({ product }: { product: Product }) => (
+const ProductCard = ({ product, searchQuery = "" }: { product: Product; searchQuery?: string }) => (
   <Link
     to={`/products/${product.id}`}
     className="bg-card border border-border rounded-sm overflow-hidden transition-all"
@@ -37,10 +38,10 @@ const ProductCard = ({ product }: { product: Product }) => (
         ))}
       </div>
       <h3 className="text-[10px] md:text-sm font-semibold text-foreground line-clamp-2 mb-1 normal-case tracking-normal font-heading">
-        {product.name}
+        <Highlight text={product.name} query={searchQuery} />
       </h3>
       <p className="text-[8px] md:text-xs font-bold text-primary mb-1 md:mb-2 uppercase tracking-wider">
-        MODEL :- {product.model}
+        MODEL :- <Highlight text={product.model} query={searchQuery} /> {product.partNumber && <>| <Highlight text={product.partNumber} query={searchQuery} /></>}
       </p>
       <div className="flex items-center gap-1 md:gap-2">
         <span className="text-sm md:text-lg font-bold text-primary font-heading">
