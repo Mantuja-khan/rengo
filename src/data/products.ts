@@ -482,7 +482,7 @@ export const products: Product[] = [
     id: 26,
     sku: "FPM-001",
     name: "MARUTI SUZUKI- FUEL MOTOR",
-    model: "RPM3001",
+    model: "RFM3001",
     partNumber: "151...F03",
     price: 490,
     oldPrice: 700,
@@ -499,7 +499,7 @@ export const products: Product[] = [
     id: 27,
     sku: "FPM-002",
     name: "MARUTI SUZUKI- FUEL MOTOR",
-    model: "RPM3002",
+    model: "RFM3002",
     partNumber: "151...P03",
     price: 490,
     oldPrice: 700,
@@ -516,7 +516,7 @@ export const products: Product[] = [
     id: 28,
     sku: "FPM-003",
     name: "MARUTI SUZUKI – FUEL MOTOR",
-    model: "RPM3003",
+    model: "RFM3003",
     partNumber: "151...R03",
     price: 490,
     oldPrice: 700,
@@ -533,7 +533,7 @@ export const products: Product[] = [
     id: 29,
     sku: "FPM-004",
     name: "MARUTI SUZUKI- FUEL MOTOR",
-    model: "RPM3004",
+    model: "RFM3004",
     partNumber: "151...L02",
     price: 490,
     oldPrice: 700,
@@ -550,7 +550,7 @@ export const products: Product[] = [
     id: 30,
     sku: "FPM-005",
     name: "MARUTI SUZUKI- FUEL MOTOR",
-    model: "RPM3005",
+    model: "RFM3005",
     partNumber: "151...K01",
     price: 490,
     oldPrice: 700,
@@ -567,7 +567,7 @@ export const products: Product[] = [
     id: 31,
     sku: "FPM-006",
     name: "MARUTI SUZUKI – FUEL MOTOR",
-    model: "RPM3006",
+    model: "RFM3006",
     partNumber: "151...R03",
     price: 490,
     oldPrice: 700,
@@ -584,7 +584,7 @@ export const products: Product[] = [
     id: 32,
     sku: "FPM-007",
     name: "MARUTI SUZUKI- FUEL MOTOR",
-    model: "RPM3007",
+    model: "RFM3007",
     partNumber: "151...RA0",
     price: 490,
     oldPrice: 700,
@@ -601,7 +601,7 @@ export const products: Product[] = [
     id: 33,
     sku: "FPM-008",
     name: "MARUTI SUZUKI – FUEL MOTOR",
-    model: "RPM3008",
+    model: "RFM3008",
     partNumber: "151...R04",
     price: 490,
     oldPrice: 700,
@@ -618,7 +618,7 @@ export const products: Product[] = [
     id: 34,
     sku: "FPM-009",
     name: "MARUTI SUZUKI – FUEL MOTOR",
-    model: "RPM3009",
+    model: "RFM3009",
     partNumber: "151...R03",
     price: 490,
     oldPrice: 700,
@@ -635,7 +635,7 @@ export const products: Product[] = [
     id: 35,
     sku: "FPM-010",
     name: "TATA – FUEL MOTOR ASSY",
-    model: "RPM3010",
+    model: "RFM3010",
     partNumber: "543...0121",
     price: 490,
     oldPrice: 700,
@@ -652,7 +652,7 @@ export const products: Product[] = [
     id: 36,
     sku: "FPM-011",
     name: "MARUTI SUZUKI- FUEL MOTOR",
-    model: "RPM3011",
+    model: "RFM3011",
     partNumber: "151...PA5",
     price: 490,
     oldPrice: 700,
@@ -669,7 +669,7 @@ export const products: Product[] = [
     id: 37,
     sku: "FPM-012",
     name: "MARUTI SUZUKI- FUEL MOTOR",
-    model: "RPM3012",
+    model: "RFM3012",
     partNumber: "151...M03",
     price: 490,
     oldPrice: 700,
@@ -686,7 +686,7 @@ export const products: Product[] = [
     id: 38,
     sku: "FPM-013",
     name: "MARUTI SUZUKI- FUEL MOTOR",
-    model: "RPM3013",
+    model: "RFM3013",
     partNumber: "151...P04",
     price: 490,
     oldPrice: 700,
@@ -703,7 +703,7 @@ export const products: Product[] = [
     id: 39,
     sku: "FPM-014",
     name: "MARUTI SUZUKI – FUEL MOTOR",
-    model: "RPM3014",
+    model: "RFM3014",
     partNumber: "151...R02",
     price: 490,
     oldPrice: 700,
@@ -720,7 +720,7 @@ export const products: Product[] = [
     id: 40,
     sku: "FPM-015",
     name: "MARUTI SUZUKI- FUEL MOTOR",
-    model: "RPM3015",
+    model: "RFM3015",
     partNumber: "151...L01",
     price: 490,
     oldPrice: 700,
@@ -737,7 +737,7 @@ export const products: Product[] = [
     id: 41,
     sku: "FPM-016",
     name: "MARUTI SUZUKI – FUEL MOTOR",
-    model: "RPM3016",
+    model: "RFM3016",
     partNumber: "151...M02",
     price: 490,
     oldPrice: 700,
@@ -754,7 +754,7 @@ export const products: Product[] = [
     id: 42,
     sku: "FPM-017",
     name: "MARUTI SUZUKI – FUEL MOTOR",
-    model: "RPM3017",
+    model: "RFM3017",
     partNumber: "151...M00",
     price: 490,
     oldPrice: 700,
@@ -771,7 +771,7 @@ export const products: Product[] = [
     id: 43,
     sku: "FPM-018",
     name: "MARUTI SUZUKI – FUEL MOTOR",
-    model: "RPM3018",
+    model: "RFM3018",
     partNumber: "151...M02",
     price: 490,
     oldPrice: 700,
@@ -788,7 +788,7 @@ export const products: Product[] = [
     id: 44,
     sku: "FPM-019",
     name: "MARUTI SUZUKI – FUEL MOTOR",
-    model: "RPM3019",
+    model: "RFM3019",
     partNumber: "151...T03",
     price: 490,
     oldPrice: 700,
@@ -805,7 +805,7 @@ export const products: Product[] = [
     id: 45,
     sku: "FPM-020",
     name: "MARUTI SUZUKI – FUEL MOTOR",
-    model: "RPM3020",
+    model: "RFM3020",
     partNumber: "151...F03",
     price: 490,
     oldPrice: 700,
@@ -822,7 +822,7 @@ export const products: Product[] = [
     id: 46,
     sku: "FPM-021",
     name: "MARUTI SUZUKI – FUEL MOTOR",
-    model: "RPM3021",
+    model: "RFM3021",
     partNumber: "151...P04",
     price: 490,
     oldPrice: 700,
@@ -839,7 +839,7 @@ export const products: Product[] = [
     id: 47,
     sku: "FPM-022",
     name: "MARUTI SUZUKI – FUEL MOTOR",
-    model: "RPM3022",
+    model: "RFM3022",
     partNumber: "151...P02",
     price: 490,
     oldPrice: 700,
@@ -856,7 +856,7 @@ export const products: Product[] = [
     id: 48,
     sku: "FPM-023",
     name: "MARUTI SUZUKI – FUEL MOTOR",
-    model: "RPM3023",
+    model: "RFM3023",
     partNumber: "151...R02",
     price: 490,
     oldPrice: 700,
@@ -873,7 +873,7 @@ export const products: Product[] = [
     id: 49,
     sku: "FPM-024",
     name: "TATA – FUEL MOTOR",
-    model: "RPM3024",
+    model: "RFM3024",
     partNumber: "544...0169",
     price: 490,
     oldPrice: 700,
@@ -890,7 +890,7 @@ export const products: Product[] = [
     id: 50,
     sku: "FPM-025",
     name: "TATA – FUEL MOTOR",
-    model: "RPM3025",
+    model: "RFM3025",
     partNumber: "543...0121",
     price: 490,
     oldPrice: 700,
@@ -1214,8 +1214,24 @@ export const products: Product[] = [
   }
 ];
 
-// Round prices to end with 99 (e.g., 5665 -> 5699)
+// Apply discounts and round prices to end with 99
 products.forEach(p => {
+  // Use oldPrice as base if it exists and is higher than price, otherwise use price
+  let basePrice = p.oldPrice && p.price && p.oldPrice > p.price ? p.oldPrice : (p.price || 0);
+  
+  if (basePrice > 0) {
+    if (p.category === "Fuel pump") {
+      p.oldPrice = basePrice;
+      p.price = basePrice * 0.70; // 30% off
+    } else if (p.category === "Fuel motor") {
+      p.oldPrice = basePrice;
+      p.price = basePrice * 0.75; // 25% off
+    } else if (p.category === "Oxygen Sensors") {
+      p.oldPrice = basePrice;
+      p.price = basePrice * 0.75; // 25% off
+    }
+  }
+
   if (p.price) {
     p.price = Math.floor(p.price / 100) * 100 + 99;
   }

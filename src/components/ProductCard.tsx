@@ -15,7 +15,7 @@ const ProductCard = ({ product, searchQuery = "" }: { product: Product; searchQu
         loading="lazy"
         width={512}
         height={512}
-        className="w-full h-full object-contain p-4"
+        className="w-full h-full object-contain p-2 md:p-4"
       />
       {product.oldPrice && product.price && (
         <span className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs font-bold px-2 py-1 rounded-sm z-10">

@@ -42,7 +42,7 @@ def gen_motor(i, pump):
     name: "{motor_name}",
     model: "{motor_model}",
     partNumber: "{pump['partNumber']}",
-    price: 490,
+    price: 525,
     oldPrice: 700,
     category: "Fuel motor",
     image: motorImg,
