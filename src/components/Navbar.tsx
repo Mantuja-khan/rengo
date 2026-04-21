@@ -33,10 +33,10 @@ const Navbar = () => {
       )
       .sort((a, b) => {
         const query = searchQuery.toLowerCase();
-        
+
         // Helper to check if it's a high-priority match
-        const isHighPriority = (p: typeof products[0]) => 
-          p.model.toLowerCase() === query || 
+        const isHighPriority = (p: typeof products[0]) =>
+          p.model.toLowerCase() === query ||
           (p.partNumber && p.partNumber.toLowerCase() === query) ||
           p.sku.toLowerCase() === query ||
           p.model.toLowerCase().startsWith(query) ||
@@ -76,7 +76,7 @@ const Navbar = () => {
                 placeholder="Search by model or part number..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 bg-transparent text-sm text-foreground outline-none"
+                className="flex-1 bg-transparent text-base text-foreground outline-none"
               />
               <button onClick={closeSearch} className="p-1">
                 <X className="h-5 w-5 text-foreground" />
@@ -84,20 +84,24 @@ const Navbar = () => {
             </div>
           )}
 
-          <Link to="/" className="flex items-center gap-2 md:gap-4">
+          <Link to="/" className="flex items-center gap-2 md:gap-3">
             <img
               src={logo}
               alt="Rengo Automotive"
-              className="h-16 md:h-20 w-auto"  // 👈 size increase
+              className="h-16 md:h-20 w-auto transition-all"
             />
-            <div>
-              <span className="font-heading text-base md:text-xl font-bold tracking-tight text-foreground">
-                RENGO
+            <div className="flex flex-col">
+              <div className="flex items-center leading-none">
+                <span className="font-heading text-lg md:text-2xl font-bold tracking-tighter text-primary">
+                  RENGO
+                </span>
+                <span className="font-heading text-lg md:text-2xl font-bold tracking-tighter text-black ml-1">
+                  AUTOMOTIVES
+                </span>
+              </div>
+              <span className="text-[12px] md:text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mt-0.5 leading-none">
+                Pvt. Ltd.
               </span>
-              <span className="font-heading text-base md:text-xl font-bold text-primary ml-0.5">
-                AUTOMOTIVES
-              </span>
-
             </div>
           </Link>
 
@@ -110,7 +114,7 @@ const Navbar = () => {
                 placeholder="Search by model or part number..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-border bg-background text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full pl-10 pr-4 py-2 border border-border bg-background text-base text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {searchQuery.trim() && (
                 <button onClick={() => setSearchQuery("")} className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -186,21 +190,66 @@ const Navbar = () => {
         </div>
       </nav>
 
+      {/* Mobile Sidebar */}
       {mobileOpen && (
-        <div className="md:hidden bg-navbar border-t border-border">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              onClick={() => setMobileOpen(false)}
-              className={`block px-5 py-3 text-sm font-semibold uppercase tracking-wide transition-colors font-heading ${location.pathname === link.path
-                ? "bg-secondary text-secondary-foreground"
-                : "text-navbar-foreground hover:bg-secondary hover:text-secondary-foreground"
-                }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <div className="fixed inset-0 z-[100] md:hidden">
+          {/* Overlay */}
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm" 
+            onClick={() => setMobileOpen(false)}
+          />
+          {/* Sidebar */}
+          <div className="absolute top-0 right-0 h-full w-[280px] bg-card flex flex-col shadow-2xl animate-in slide-in-from-right duration-300">
+            <div className="p-5 border-b border-border flex items-center justify-between bg-accent/10">
+              <div className="flex items-center gap-3">
+                <img src={logo} alt="Logo" className="h-12 w-auto" />
+                <div className="flex flex-col">
+                  <div className="leading-tight">
+                    <span className="text-primary font-bold">RENGO</span>
+                    <span className="text-foreground font-bold ml-1">AUTO</span>
+                  </div>
+                  <span className="text-[8px] font-bold text-muted-foreground uppercase tracking-tighter">Automotives Pvt. Ltd.</span>
+                </div>
+              </div>
+              <button 
+                onClick={() => setMobileOpen(false)}
+                className="p-2 hover:bg-accent rounded-full transition-colors"
+              >
+                <X className="h-6 w-6 text-foreground" />
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto py-6 px-4">
+              <nav className="space-y-1">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    onClick={() => setMobileOpen(false)}
+                    className={`flex items-center px-4 py-4 rounded-sm text-sm font-bold uppercase tracking-widest transition-all ${
+                      location.pathname === link.path
+                        ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-[1.02]"
+                        : "text-foreground hover:bg-accent border border-transparent hover:border-border"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+            
+            <div className="p-6 border-t border-border bg-accent/30 space-y-4">
+              <div className="text-center">
+                <p className="text-[9px] text-muted-foreground uppercase tracking-widest font-bold">Manufacturing Excellence Since 2012</p>
+              </div>
+              <button 
+                onClick={() => { navigate("/contact"); setMobileOpen(false); }}
+                className="w-full bg-secondary text-secondary-foreground py-3 rounded-sm text-xs font-bold uppercase tracking-widest hover:bg-secondary/90 transition-colors"
+              >
+                Get a Quote
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </header>

@@ -1,13 +1,19 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
+import logo from "../assets/rengologo.png"
 
 const Footer = () => (
   <footer className="bg-secondary text-secondary-foreground">
     <div className="container py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
       <div>
-        <h3 className="text-lg mb-4">RENGO <span className="text-primary">AUTOMOTIVE</span></h3>
+        <div className="flex items-center gap-3 mb-4">
+          <h3 className="text-xl font-bold font-heading leading-none">
+            <span className="text-primary">RENGO</span> <span className="text-white">AUTOMOTIVES</span>
+            <span className="block text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Pvt. Ltd.</span>
+          </h3>
+        </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Manufacturer of premium car fuel pumps, oxygen sensors & auto parts. Advanced manufacturing facility with consistent quality standards.
+          Manufacturer of high-precision car fuel pumps, oxygen sensors & auto parts. Advanced manufacturing facility with consistent quality standards based in Bhiwadi.
         </p>
       </div>
       <div>
@@ -24,7 +30,7 @@ const Footer = () => (
         <ul className="space-y-2 text-sm">
           <li><Link to="/products?category=Fuel pump" className="text-muted-foreground hover:text-primary transition-colors">Fuel Pump</Link></li>
           <li><Link to="/products?category=Oxygen Sensors" className="text-muted-foreground hover:text-primary transition-colors">Oxygen Sensors</Link></li>
-          <li><Link to="/products?category=Fuel pump motor" className="text-muted-foreground hover:text-primary transition-colors">Fuel Pump Motor</Link></li>
+          <li><Link to="/products?category=Fuel motor" className="text-muted-foreground hover:text-primary transition-colors">Fuel Pump Motor</Link></li>
         </ul>
       </div>
       <div>
@@ -48,6 +54,8 @@ const Footer = () => (
     <div className="border-t border-muted-foreground/20">
       <div className="container py-4 text-center text-xs text-muted-foreground">
         © 2026 Rengo Automotive Private Limited. All rights reserved.
+        <br />
+        Designed By SS Graphices
       </div>
     </div>
   </footer>

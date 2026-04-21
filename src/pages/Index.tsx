@@ -16,11 +16,6 @@ const heroSlides = [
   { image: heroSlide4, title: "Complete Product\nRange", subtitle: "50+ fuel pump models covering major Indian automobile brands." },
 ];
 
-const features = [
-  { icon: Factory, title: "Own Manufacturing", desc: "Advanced facility in Bhiwadi" },
-  { icon: Shield, title: "Quality Assured", desc: "Rigorous testing standards" },
-  { icon: Headphones, title: "Expert Support", desc: "Dedicated technical team" },
-];
 
 const brands = [
   { name: "Maruti Suzuki", logo: "https://static.vecteezy.com/system/resources/thumbnails/020/336/714/small_2x/maruti-suzuki-logo-maruiti-icon-free-free-vector.jpg" },
@@ -87,23 +82,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Features bar */}
-      <section className="bg-card border-b border-border scroll-fade">
-        <div className="container py-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {features.map((f) => (
-            <div key={f.title} className="flex items-center gap-3">
-              <div className="bg-primary/10 p-3 rounded-full">
-                <f.icon className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <p className="font-semibold text-sm text-foreground">{f.title}</p>
-                <p className="text-xs text-muted-foreground">{f.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      
+
+
       {/* Short About Section */}
       <section className="py-16 bg-white scroll-fade">
         <div className="container grid md:grid-cols-2 gap-12 items-center">
@@ -121,22 +101,22 @@ const Index = () => {
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-4">
-             <div className="bg-accent p-6 rounded-sm text-center">
-                <p className="text-3xl font-bold text-primary mb-1">12+</p>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Years Exp.</p>
-             </div>
-             <div className="bg-accent p-6 rounded-sm text-center">
-                <p className="text-3xl font-bold text-primary mb-1">50+</p>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Models</p>
-             </div>
-             <div className="bg-accent p-6 rounded-sm text-center">
-                <p className="text-3xl font-bold text-primary mb-1">100%</p>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Tested</p>
-             </div>
-             <div className="bg-accent p-6 rounded-sm text-center">
-                <p className="text-3xl font-bold text-primary mb-1">OEM</p>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Quality Standards</p>
-             </div>
+            <div className="bg-accent p-6 rounded-sm text-center">
+              <p className="text-3xl font-bold text-primary mb-1">12+</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider">Years Exp.</p>
+            </div>
+            <div className="bg-accent p-6 rounded-sm text-center">
+              <p className="text-3xl font-bold text-primary mb-1">50+</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider">Models</p>
+            </div>
+            <div className="bg-accent p-6 rounded-sm text-center">
+              <p className="text-3xl font-bold text-primary mb-1">100%</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider">Tested</p>
+            </div>
+            <div className="bg-accent p-6 rounded-sm text-center">
+              <p className="text-3xl font-bold text-primary mb-1">OEM</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider">Quality Standards</p>
+            </div>
           </div>
         </div>
       </section>
@@ -150,10 +130,10 @@ const Index = () => {
           <div className="grid grid-cols-3 md:grid-cols-7 gap-8 items-center">
             {brands.map((brand) => (
               <div key={brand.name} className="flex items-center justify-center p-2 border border-black bg-white rounded-sm h-16 md:h-20">
-                <img 
-                  src={brand.logo} 
-                  alt={brand.name} 
-                  className="max-h-full w-auto object-contain transition-transform hover:scale-110" 
+                <img
+                  src={brand.logo}
+                  alt={brand.name}
+                  className="max-h-full w-auto object-contain transition-transform hover:scale-110"
                 />
               </div>
             ))}
@@ -170,9 +150,11 @@ const Index = () => {
               View All <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {products.slice(0, 4).map((p) => (
-              <ProductCard key={p.id} product={p} />
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+            {products.slice(0, 5).map((p, i) => (
+              <div key={p.id} className={i === 4 ? "hidden xl:block" : "block"}>
+                <ProductCard product={p} />
+              </div>
             ))}
           </div>
         </div>
