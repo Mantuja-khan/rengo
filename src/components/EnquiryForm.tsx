@@ -30,19 +30,45 @@ export function EnquiryForm({ product, open, onOpenChange }: EnquiryFormProps) {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    toast({
-      title: "Enquiry Sent",
-      description: "Thank you for your interest. Our team will contact you soon.",
-    });
-    
-    setIsSubmitting(false);
-    onOpenChange(false);
-    setEmail("");
-    setMobile("");
-    setRequirement("");
+    try {
+      const response = await fetch('http://localhost:5000/api/enquiry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          mobile,
+          message: requirement,
+          productModel: product.model,
+          productName: product.name,
+          subject: `Product Enquiry for ${product.model}`,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send enquiry');
+      }
+      
+      toast({
+        title: "Enquiry Sent",
+        description: "Thank you for your interest. Our team will contact you soon.",
+      });
+      
+      onOpenChange(false);
+      setEmail("");
+      setMobile("");
+      setRequirement("");
+    } catch (error) {
+      console.error('Enquiry Error:', error);
+      toast({
+        title: "Submission Failed",
+        description: "Could not send enquiry. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

@@ -3,10 +3,43 @@ import { useState } from "react";
 import ctaBgContact from "@/assets/cta-bg-contact.jpg";
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('http://localhost:5000/api/enquiry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+      
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Contact error:', error);
+      alert('Failed to send message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -52,13 +85,47 @@ const Contact = () => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
-                  <input required placeholder="Your Name" className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-                  <input required type="email" placeholder="Your Email" className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+                  <input 
+                    required 
+                    name="name"
+                    placeholder="Your Name" 
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" 
+                  />
+                  <input 
+                    required 
+                    type="email" 
+                    name="email"
+                    placeholder="Your Email" 
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" 
+                  />
                 </div>
-                <input required placeholder="Subject" className="w-full border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-                <textarea required rows={5} placeholder="Your Message" className="w-full border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none" />
-                <button type="submit" className="bg-primary text-primary-foreground px-8 py-3 font-semibold uppercase text-sm hover:bg-primary/90 transition-colors rounded-sm font-heading">
-                  Send Message
+                <input 
+                  required 
+                  name="subject"
+                  placeholder="Subject" 
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="w-full border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" 
+                />
+                <textarea 
+                  required 
+                  name="message"
+                  rows={5} 
+                  placeholder="Your Message" 
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="w-full border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none" 
+                />
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="bg-primary text-primary-foreground px-8 py-3 font-semibold uppercase text-sm hover:bg-primary/90 transition-colors rounded-sm font-heading disabled:opacity-50"
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
               </form>
             )}
