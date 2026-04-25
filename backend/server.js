@@ -35,6 +35,8 @@ app.post('/api/enquiry', async (req, res) => {
   if (subject) emailText += `Subject: ${subject}\n`;
   if (message) emailText += `Message: ${message}\n`;
 
+  emailText += `\n---\nSent from https://rengoautomotives.com`;
+
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: process.env.RECEIVER_EMAIL,
@@ -45,9 +47,9 @@ app.post('/api/enquiry', async (req, res) => {
   try {
     if (!process.env.EMAIL_PASS || process.env.EMAIL_PASS.trim() === '') {
       console.error('ERROR: EMAIL_PASS is empty in .env');
-      return res.status(400).json({ 
-        message: 'Backend Configuration Error', 
-        error: 'You need to set your Gmail App Password in backend/.env' 
+      return res.status(400).json({
+        message: 'Backend Configuration Error',
+        error: 'You need to set your Gmail App Password in backend/.env'
       });
     }
 

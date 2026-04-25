@@ -29,9 +29,9 @@ export function EnquiryForm({ product, open, onOpenChange }: EnquiryFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
-      const response = await fetch('http://localhost:5000/api/enquiry', {
+      const response = await fetch('https://api.rengoautomotives.com/api/enquiry', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,12 +49,12 @@ export function EnquiryForm({ product, open, onOpenChange }: EnquiryFormProps) {
       if (!response.ok) {
         throw new Error('Failed to send enquiry');
       }
-      
+
       toast({
         title: "Enquiry Sent",
         description: "Thank you for your interest. Our team will contact you soon.",
       });
-      
+
       onOpenChange(false);
       setEmail("");
       setMobile("");
