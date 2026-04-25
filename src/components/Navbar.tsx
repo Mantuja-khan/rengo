@@ -1,9 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ShoppingCart, Search, Menu, X } from "lucide-react";
+import { ShoppingCart, Search, Menu, X, FileText } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { products } from "@/data/products";
 import { Highlight } from "./Highlight";
 import logo from "../assets/rengologo.png"
+import cataloguePdf from "../assets/rengo.pdf";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -105,9 +106,9 @@ const Navbar = () => {
             </div>
           </Link>
 
-          {/* Desktop search bar */}
-          <div className="hidden md:flex items-center gap-4 flex-1 max-w-md mx-8 relative">
-            <div className="relative w-full">
+          {/* Desktop search/catalogue/cart bar */}
+          <div className="hidden md:flex items-center gap-4 flex-1 max-w-xl mx-8 relative">
+            <div className="relative w-full flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <input
                 type="text"
@@ -122,6 +123,21 @@ const Navbar = () => {
                 </button>
               )}
             </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <a
+                href={cataloguePdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-sm text-xs font-bold uppercase tracking-wider hover:bg-primary/90 transition-colors"
+              >
+                <FileText className="h-4 w-4" />
+                <span className="hidden lg:inline">Catalogue</span>
+              </a>
+              <button className="relative p-2 hover:text-primary transition-colors bg-accent/50 rounded-sm">
+                <ShoppingCart className="h-5 w-5" />
+                <span className="absolute -top-0.5 -right-0.5 bg-primary text-primary-foreground text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
+              </button>
+            </div>
           </div>
 
           <div className="flex items-center gap-2">
@@ -129,10 +145,16 @@ const Navbar = () => {
             <button className="md:hidden p-2 hover:text-primary transition-colors" onClick={() => setSearchOpen(true)}>
               <Search className="h-5 w-5" />
             </button>
-            <button className="relative p-2 hover:text-primary transition-colors hidden md:block">
-              <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-0.5 -right-0.5 bg-primary text-primary-foreground text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
-            </button>
+            {/* Mobile Catalogue Button */}
+            <a
+              href={cataloguePdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="View Catalogue"
+              className="md:hidden flex items-center justify-center bg-primary text-primary-foreground w-9 h-9 rounded-sm hover:bg-primary/90 transition-colors"
+            >
+              <FileText className="h-5 w-5" />
+            </a>
             <button className="md:hidden p-2" onClick={() => setMobileOpen(!mobileOpen)}>
               {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>

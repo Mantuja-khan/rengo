@@ -40,6 +40,7 @@ app.post('/api/enquiry', async (req, res) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: process.env.RECEIVER_EMAIL,
+    replyTo: email, // This allows the admin to click 'Reply' in their email to respond to the customer
     subject: subject || `New Enquiry from ${name || email}`,
     text: emailText,
   };

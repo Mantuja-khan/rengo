@@ -21,6 +21,7 @@ interface EnquiryFormProps {
 
 export function EnquiryForm({ product, open, onOpenChange }: EnquiryFormProps) {
   const { toast } = useToast();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [requirement, setRequirement] = useState("");
@@ -37,6 +38,7 @@ export function EnquiryForm({ product, open, onOpenChange }: EnquiryFormProps) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          name,
           email,
           mobile,
           message: requirement,
@@ -56,6 +58,7 @@ export function EnquiryForm({ product, open, onOpenChange }: EnquiryFormProps) {
       });
 
       onOpenChange(false);
+      setName("");
       setEmail("");
       setMobile("");
       setRequirement("");
@@ -88,6 +91,16 @@ export function EnquiryForm({ product, open, onOpenChange }: EnquiryFormProps) {
           </div>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4 pt-4">
+          <div className="space-y-2">
+            <Label htmlFor="name">Full Name</Label>
+            <Input
+              id="name"
+              placeholder="Your Name"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
           <div className="space-y-2">
             <Label htmlFor="email">Email Address (Gmail)</Label>
             <Input

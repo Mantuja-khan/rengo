@@ -6,6 +6,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    mobile: "",
     subject: "",
     message: "",
   });
@@ -16,7 +17,7 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('https://rengoautomotives.com/api/enquiry', {
+      const response = await fetch('https://api.rengoautomotives.com/api/enquiry', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,6 +30,7 @@ const Contact = () => {
       }
       
       setSubmitted(true);
+      setFormData({ name: "", email: "", mobile: "", subject: "", message: "" });
     } catch (error) {
       console.error('Contact error:', error);
       alert('Failed to send message. Please try again later.');
@@ -57,7 +59,7 @@ const Contact = () => {
         <div className="grid md:grid-cols-3 gap-8 mb-12 scroll-fade">
           {[
             { icon: Phone, title: "Phone", lines: ["+91 9929095035", "+91 8930245250"] },
-            { icon: Mail, title: "Email", lines: ["Rangoverautomotive@gmail.com"] },
+            { icon: Mail, title: "Email", lines: ["rengoautomotive@gmail.com"] },
             { icon: MapPin, title: "Address", lines: ["A-348-349 (S), Phool Bagh", "RIICO Industrial Area, Bhiwadi 301019, Rajasthan"] },
           ].map((c) => (
             <div key={c.title} className="bg-card border border-border p-6 rounded-sm text-center">
@@ -81,10 +83,16 @@ const Contact = () => {
             {submitted ? (
               <div className="bg-accent border border-border p-6 rounded-sm text-center">
                 <p className="text-foreground font-semibold">Thank you! Your message has been sent.</p>
+                <button 
+                  onClick={() => setSubmitted(false)}
+                  className="mt-4 text-primary font-bold uppercase text-xs hover:underline"
+                >
+                  Send another message
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input 
                     required 
                     name="name"
@@ -103,14 +111,25 @@ const Contact = () => {
                     className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" 
                   />
                 </div>
-                <input 
-                  required 
-                  name="subject"
-                  placeholder="Subject" 
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className="w-full border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" 
-                />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <input 
+                    required 
+                    name="mobile"
+                    type="tel"
+                    placeholder="Mobile Number" 
+                    value={formData.mobile}
+                    onChange={handleChange}
+                    className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" 
+                  />
+                  <input 
+                    required 
+                    name="subject"
+                    placeholder="Subject" 
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" 
+                  />
+                </div>
                 <textarea 
                   required 
                   name="message"
@@ -123,7 +142,7 @@ const Contact = () => {
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="bg-primary text-primary-foreground px-8 py-3 font-semibold uppercase text-sm hover:bg-primary/90 transition-colors rounded-sm font-heading disabled:opacity-50"
+                  className="bg-primary text-primary-foreground px-8 py-3 font-semibold uppercase text-sm hover:bg-primary/90 transition-colors rounded-sm font-heading disabled:opacity-50 w-full md:w-auto"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
