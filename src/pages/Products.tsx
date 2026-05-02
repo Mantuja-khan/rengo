@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Search } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import { products, categories } from "@/data/products";
 import ctaBgProducts from "@/assets/cta-bg-products.jpg";
@@ -8,36 +6,9 @@ import ctaBgProducts from "@/assets/cta-bg-products.jpg";
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get("category") || "All";
-  const [search, setSearch] = useState("");
 
   const filtered = products.filter((p) => {
-    const matchesCategory = activeCategory === "All" || p.category === activeCategory;
-    const query = search.toLowerCase();
-    const matchesSearch = 
-      p.name.toLowerCase().includes(query) || 
-      p.model.toLowerCase().includes(query) || 
-      p.sku.toLowerCase().includes(query) || 
-      p.vehicle.toLowerCase().includes(query) ||
-      p.category.toLowerCase().includes(query) ||
-      (p.partNumber && p.partNumber.toLowerCase().includes(query));
-    return matchesCategory && matchesSearch;
-  }).sort((a, b) => {
-    const query = search.toLowerCase();
-    if (!query) return 0;
-
-    const isHighPriority = (p: typeof products[0]) => 
-      p.model.toLowerCase() === query || 
-      (p.partNumber && p.partNumber.toLowerCase() === query) ||
-      p.sku.toLowerCase() === query ||
-      p.model.toLowerCase().startsWith(query) ||
-      (p.partNumber && p.partNumber.toLowerCase().includes(query) && p.partNumber.toLowerCase().split('...')[1]?.startsWith(query));
-
-    const aPriority = isHighPriority(a);
-    const bPriority = isHighPriority(b);
-
-    if (aPriority && !bPriority) return -1;
-    if (!aPriority && bPriority) return 1;
-    return 0;
+    return activeCategory === "All" || p.category === activeCategory;
   });
 
   return (
@@ -82,22 +53,9 @@ const Products = () => {
           </aside>
 
           <div>
-            <div className="mb-6 relative">
-              <input
-                type="text"
-                placeholder="Search by Name, Model, Part Number, Vehicle..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-4 pr-10 py-3 border border-border bg-card rounded-sm focus:outline-none focus:ring-1 focus:ring-primary shadow-sm"
-              />
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                <Search className="h-5 w-5" />
-              </div>
-            </div>
-            
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-6">
               {filtered.map((p) => (
-                <ProductCard key={p.id} product={p} searchQuery={search} />
+                <ProductCard key={p.id} product={p} />
               ))}
             </div>
             {filtered.length === 0 && (

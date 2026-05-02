@@ -1,6 +1,7 @@
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useState } from "react";
 import ctaBgContact from "@/assets/cta-bg-contact.jpg";
+
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       const response = await fetch('https://api.rengoautomotives.com/api/enquiry', {
         method: 'POST',
@@ -28,7 +29,7 @@ const Contact = () => {
       if (!response.ok) {
         throw new Error('Failed to send message');
       }
-      
+
       setSubmitted(true);
       setFormData({ name: "", email: "", mobile: "", subject: "", message: "" });
     } catch (error) {
@@ -60,7 +61,7 @@ const Contact = () => {
           {[
             { icon: Phone, title: "Phone", lines: ["+91 9929095035", "+91 8930245250"] },
             { icon: Mail, title: "Email", lines: ["rengoautomotive@gmail.com"] },
-            { icon: MapPin, title: "Address", lines: ["A-348-349 (S), Phool Bagh", "RIICO Industrial Area, Bhiwadi 301019, Rajasthan"] },
+            { icon: MapPin, title: "Address", lines: ["Rengo Automotives Pvt. Ltd.", "A-348-349(s), Phool Bagh RIICO Industrial Area,", "Bhiwadi, Alwar (Rajasthan)"] },
           ].map((c) => (
             <div key={c.title} className="bg-card border border-border p-6 rounded-sm text-center">
               <div className="bg-primary/10 p-3 rounded-full w-fit mx-auto mb-3">
@@ -83,7 +84,7 @@ const Contact = () => {
             {submitted ? (
               <div className="bg-accent border border-border p-6 rounded-sm text-center">
                 <p className="text-foreground font-semibold">Thank you! Your message has been sent.</p>
-                <button 
+                <button
                   onClick={() => setSubmitted(false)}
                   className="mt-4 text-primary font-bold uppercase text-xs hover:underline"
                 >
@@ -93,54 +94,54 @@ const Contact = () => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input 
-                    required 
+                  <input
+                    required
                     name="name"
-                    placeholder="Your Name" 
+                    placeholder="Your Name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" 
+                    className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary"
                   />
-                  <input 
-                    required 
-                    type="email" 
+                  <input
+                    required
+                    type="email"
                     name="email"
-                    placeholder="Your Email" 
+                    placeholder="Your Email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" 
+                    className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input 
-                    required 
+                  <input
+                    required
                     name="mobile"
                     type="tel"
-                    placeholder="Mobile Number" 
+                    placeholder="Mobile Number"
                     value={formData.mobile}
                     onChange={handleChange}
-                    className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" 
+                    className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary"
                   />
-                  <input 
-                    required 
+                  <input
+                    required
                     name="subject"
-                    placeholder="Subject" 
+                    placeholder="Subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" 
+                    className="border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 </div>
-                <textarea 
-                  required 
+                <textarea
+                  required
                   name="message"
-                  rows={5} 
-                  placeholder="Your Message" 
+                  rows={5}
+                  placeholder="Your Message"
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none" 
+                  className="w-full border border-border bg-card px-4 py-2.5 text-sm text-foreground rounded-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none"
                 />
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   disabled={isSubmitting}
                   className="bg-primary text-primary-foreground px-8 py-3 font-semibold uppercase text-sm hover:bg-primary/90 transition-colors rounded-sm font-heading disabled:opacity-50 w-full md:w-auto"
                 >
@@ -176,18 +177,32 @@ const Contact = () => {
       {/* Google Maps */}
       <section className="scroll-fade">
         <div className="container py-12">
-          <h2 className="text-2xl text-foreground mb-6 text-center">Our Location</h2>
+          <h2 className="text-2xl text-foreground mb-2 text-center">Our Location</h2>
+          <p className="text-center text-muted-foreground text-sm mb-6 font-body normal-case tracking-normal font-normal">
+            Rengo Automotives Pvt. Ltd. — A-348-349(s), Phool Bagh RIICO Industrial Area, Bhiwadi, Alwar (Rajasthan)
+          </p>
           <div className="w-full h-[400px] rounded-sm overflow-hidden border border-border">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3521.567!2d76.8612!3d28.2096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d47000000000%3A0x0!2sRIICO%20Industrial%20Area%2C%20Bhiwadi%2C%20Rajasthan%20301019!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3521.4!2d76.8692086!3d28.206378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d37007843167f%3A0xbb4db83c23ed736c!2sRENGO%20AUTOMATIVE%20PRIVATE%20LIMITED!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Rengo Automotive Location - RIICO Industrial Area, Bhiwadi"
+              title="Rengo Automotives Pvt. Ltd. - A-348-349(s), Phool Bagh RIICO Industrial Area, Bhiwadi, Alwar (Rajasthan)"
             />
+          </div>
+          <div className="mt-4 text-center">
+            <a
+              href="https://www.google.com/maps/place/RENGO+AUTOMATIVE+PRIVATE+LIMITED/@28.2064775,76.851148,15z/data=!4m10!1m2!2m1!1sA-348-349(s)-+Phool+bagh+riico+industrial+area+,+bhiwadi+,+!3m6!1s0x390d37007843167f:0xbb4db83c23ed736c!8m2!3d28.206378!4d76.8714086!15sCjpBLTM0OC0zNDkocyktIFBob29sIGJhZ2ggcmlpY28gaW5kdXN0cmlhbCBhcmVhICwgYmhpd2FkaSAskgEMbWFudWZhY3R1cmVy4AEA!16s%2Fg%2F11y_xdv1g9?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-primary text-sm font-semibold uppercase hover:underline"
+            >
+              <MapPin className="h-4 w-4" />
+              View on Google Maps
+            </a>
           </div>
         </div>
       </section>

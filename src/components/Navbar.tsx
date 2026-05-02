@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ShoppingCart, Search, Menu, X, FileText } from "lucide-react";
+import { Search, Menu, X, FileText } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { products } from "@/data/products";
 import { Highlight } from "./Highlight";
@@ -133,10 +133,6 @@ const Navbar = () => {
                 <FileText className="h-4 w-4" />
                 <span className="hidden lg:inline">Catalogue</span>
               </a>
-              <button className="relative p-2 hover:text-primary transition-colors bg-accent/50 rounded-sm">
-                <ShoppingCart className="h-5 w-5" />
-                <span className="absolute -top-0.5 -right-0.5 bg-primary text-primary-foreground text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
-              </button>
             </div>
           </div>
 
