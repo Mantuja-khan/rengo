@@ -95,7 +95,7 @@ export const products: Product[] = [
     name: "MARUTI SUZUKI- FUEL PUMP",
     model: "RFP1001",
     partNumber: "151...PA5",
-    price: 3500,
+    price: 3499,
     oldPrice: 6364,
     category: "Fuel pump",
     image: rf1,
